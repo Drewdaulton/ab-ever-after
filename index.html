@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A&B's Ever After – Seating Chart</title>
+
+  <!-- Elegant serif font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Libre Baskerville', serif;
+      background: #f6f4f1;
+      margin: 0;
+      padding: 30px 16px;
+      color: #1f1f1f;
+    }
+
+    .card {
+      background: #ffffff;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 40px 30px 45px;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #6f6f6f;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #cfcfcf;
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      background: #1f1f1f;
+      color: #ffffff;
+      cursor: pointer;
+      font-family: 'Libre Baskerville', serif;
+      letter-spacing: 0.5px;
+    }
+
+    .result {
+      margin-top: 28px;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .result strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 22px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e5e5e5;
+      margin: 36px 0 28px;
+    }
+
+    .floorplan {
+      text-align: center;
+    }
+
+    .floorplan h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .floorplan p {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 18px;
+    }
+
+    .floorplan-placeholder {
+      background: #f1f1f1;
+      border-radius: 12px;
+      padding: 40px 20px;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>A&B's Ever After</h1>
+    <div class="subtitle">Please enter your name to find your table</div>
+
+    <input type="text" id="guestName" placeholder="Enter your full or first name" />
+    <button onclick="findSeat()">Find My Seat</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="divider"></div>
+
+    <div class="floorplan">
+      <h2>Reception Layout</h2>
+      <p>Family-style seating · Black Tie Reception</p>
+      <div class="floorplan-placeholder">
+        Floor plan coming soon
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const guests = [
+      { name: "Andrew Daulton", table: "Sweetheart Table" },
+      { name: "Jared Daulton", table: "Bridal Party Table" },
+      { name: "Seth Daulton", table: "Bridal Party Table" },
+      { name: "Connor Wilbanks", table: "Table 1" },
+      { name: "Sydney Patton", table: "Table 1" },
+      { name: "Aaron Riddle", table: "Table 2" },
+      { name: "Rob Daulton", table: "Table 3" },
+      { name: "Eric Soh", table: "Table 4" },
+      { name: "Sharon Soh", table: "Table 4" }
+    ];
+
+    function findSeat() {
+      const input = document.getElementById('guestName').value.toLowerCase().trim();
+      const result = document.getElementById('result');
+
+      if (!input) {
+        result.innerHTML = "";
+        return;
+      }
+
+      const guest = guests.find(g => g.name.toLowerCase().includes(input));
+
+      if (guest) {
+        result.innerHTML = `${guest.name}<strong>${guest.table}</strong>`;
+      } else {
+        result.innerHTML = "We were unable to locate your name. Please see the host for assistance.";
+      }
+    }
+  </script>
+</body>
+</html>
